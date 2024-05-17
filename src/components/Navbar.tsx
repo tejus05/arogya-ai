@@ -1,7 +1,17 @@
 "use client";
 
+import Skeleton from '@/components/Skeleton';
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuLabel,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet";
 import { Menu } from "lucide-react";
+import { useSession } from "next-auth/react";
+import Image from "next/image";
 import Link from "next/link";
 import React from "react";
 
@@ -23,7 +33,7 @@ const NavLink: React.FC<NavLinkProps> = ({ href, children, onClick }) => {
   );
 };
 
-const Header: React.FC = () => {
+const Navbar: React.FC = () => {
   const [isOpen, setIsOpen] = React.useState(false);
 
   return (
@@ -31,16 +41,14 @@ const Header: React.FC = () => {
       <div className="flex gap-5 px-5 w-full text-black whitespace-nowrap max-w-7xl">
         <Link
           href="home"
-          className="sm:text-2xl font-bold text-xl hover:opacity-90 transition text-black/85 cursor-pointer"
+          className="sm:text-2xl my-auto font-bold text-xl hover:opacity-90 transition text-black/85 cursor-pointer"
         >
-          thequantumcoder
+          ArogyaAI
         </Link>
         <div className="flex-1" />
         <nav className="hidden justify-between items-center md:flex space-x-10">
           <NavLink href="home">Home</NavLink>
-          <NavLink href="about">About</NavLink>
-          <NavLink href="projects">Projects</NavLink>
-          <NavLink href="contact">Contact</NavLink>
+          <AuthStatus />
         </nav>
         <Sheet open={isOpen} onOpenChange={setIsOpen}>
           <SheetTrigger asChild>
@@ -51,22 +59,14 @@ const Header: React.FC = () => {
               <Menu className="h-6 w-6" />
             </button>
           </SheetTrigger>
-          <SheetContent side="top" className="flex flex-col gap-4 p-4">
+          <SheetContent side="top" className="flex flex-col items-center justify-center gap-4 p-4">
             <Link href="/" className="text-xl  font-bold">
-              thequantumcoder
+              ArogyaAI
             </Link>
             <NavLink onClick={() => setIsOpen(false)} href="home">
               Home
             </NavLink>
-            <NavLink onClick={() => setIsOpen(false)} href="about">
-              About
-            </NavLink>
-            <NavLink onClick={() => setIsOpen(false)} href="projects">
-              Projects
-            </NavLink>
-            <NavLink onClick={() => setIsOpen(false)} href="contact">
-              Contact
-            </NavLink>
+            <AuthStatus />
           </SheetContent>
         </Sheet>
       </div>
@@ -75,4 +75,48 @@ const Header: React.FC = () => {
   );
 };
 
-export default Header;
+const AuthStatus = () => {
+  const { status, data: session } = useSession();
+  let sessionImage = session?.user?.image;
+
+  if (status === "loading") return <Skeleton width="3rem" />;
+
+  if (status === "unauthenticated")
+    return (
+      <Link href="/api/auth/signin" className="nav-link">
+        Log In
+      </Link>
+    );
+
+  return (
+    <div>
+      {status === "authenticated" && (
+        <DropdownMenu>
+          <DropdownMenuTrigger>
+            <Image
+            // @ts-ignore
+              src={sessionImage}
+              className="cursor-pointer rounded-full"
+              width={45}
+              height={45}
+              alt="profile-image"
+            />
+          </DropdownMenuTrigger>
+          <DropdownMenuContent>
+            <DropdownMenuLabel>
+              <p>{session.user!.email}</p>
+            </DropdownMenuLabel>
+            <DropdownMenuItem>
+              <Link href="dashboard">Dashboard</Link>
+            </DropdownMenuItem>
+            <DropdownMenuItem>
+              <Link href="/api/auth/signout">Log Out</Link>
+            </DropdownMenuItem>
+          </DropdownMenuContent>
+        </DropdownMenu>
+      )}
+    </div>
+  );
+};
+
+export default Navbar;
