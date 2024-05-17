@@ -36,8 +36,8 @@ const cardMap = [
       "https://www.priviahealth.com/wp-content/uploads/2019/09/03_20_17_Why-the-Doctor-Patient-Relationship-is-Important-e1530037975292-1200x800.jpg",
   },
   {
-    title: "Progress Tracker",
-    link: "progress-tracker",
+    title: "Arogya Tracker",
+    link: "arogya-tracker",
     buttonText: "Track Now",
     description:
       "Monitor your health progress with our intuitive tracker. Set goals, track them, and celebrate your achievements.",
