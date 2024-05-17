@@ -41,13 +41,14 @@ const Navbar: React.FC = () => {
       <div className="flex gap-5 px-5 w-full text-black whitespace-nowrap max-w-7xl">
         <Link
           href="home"
-          className="sm:text-2xl my-auto font-bold text-xl hover:opacity-90 transition text-black/85 cursor-pointer"
+          className="sm:text-3xl my-auto font-bold text-xl hover:opacity-90 transition text-black/85 cursor-pointer"
         >
           ArogyaAI
         </Link>
         <div className="flex-1" />
         <nav className="hidden justify-between items-center md:flex space-x-10">
           <NavLink href="home">Home</NavLink>
+          <NavLink href="dashboard">Dashboard</NavLink>
           <AuthStatus />
         </nav>
         <Sheet open={isOpen} onOpenChange={setIsOpen}>
@@ -97,8 +98,8 @@ const AuthStatus = () => {
             // @ts-ignore
               src={sessionImage}
               className="cursor-pointer rounded-full"
-              width={45}
-              height={45}
+              width={40}
+              height={40}
               alt="profile-image"
             />
           </DropdownMenuTrigger>
@@ -106,9 +107,6 @@ const AuthStatus = () => {
             <DropdownMenuLabel>
               <p>{session.user!.email}</p>
             </DropdownMenuLabel>
-            <DropdownMenuItem>
-              <Link href="dashboard">Dashboard</Link>
-            </DropdownMenuItem>
             <DropdownMenuItem>
               <Link href="/api/auth/signout">Log Out</Link>
             </DropdownMenuItem>
