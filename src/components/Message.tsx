@@ -303,7 +303,9 @@ const MessageElement = ({
               >
                 <Image
                   fill
-                  src={sessionImage}
+                  src={
+                    isCurrentUser ? (sessionImage as string) : "/avatar.png"
+                  }
                   alt="Profile picture"
                   referrerPolicy="no-referrer"
                   className="rounded-full"

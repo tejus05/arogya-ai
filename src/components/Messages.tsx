@@ -49,7 +49,6 @@ const Messages = ({
   if (!isMounted) {
     return "";
   }
-  console.log(messages);
 
   return (
     <div

@@ -5,7 +5,6 @@ import { useRef, useState } from "react";
 import { toast } from "react-hot-toast";
 import TextareaAutosize from "react-textarea-autosize";
 import { Button } from "./ui/button";
-import { Loader2 } from "lucide-react";
 
 const ChatInput = () => {
   const textareaRef = useRef<HTMLTextAreaElement | null>(null);
@@ -28,7 +27,7 @@ const ChatInput = () => {
   };
 
   return (
-    <div className="border-t border-gray-200 px-4 pt-4 mb-2 sm:mb-0">
+    <div className="border-t border-gray-200 px-4 pt-4 mb-2 sm:mb-0 fixed bottom-0 w-full pb-10 z-50 bg-white">
       <div className="relative flex-1 overflow-hidden rounded-lg shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-indigo-600">
         <TextareaAutosize
           ref={textareaRef}
@@ -59,11 +58,7 @@ const ChatInput = () => {
         <div className="absolute right-0 bottom-0 flex justify-between py-2 pl-3 pr-2">
           <div className="flex-shrin-0">
             <Button disabled={isLoading} onClick={sendMessage} type="submit">
-              {isLoading ? (
-                <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-              ) : (
-                "Post"
-              )}
+              Send
             </Button>
           </div>
         </div>
