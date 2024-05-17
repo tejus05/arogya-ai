@@ -1,12 +1,11 @@
 import db from '@/db/redis';
+import { pusherServer } from "@/lib/pusher";
+import { toPusherKey } from "@/lib/utils";
 import { Message, messageSchema } from "@/lib/validations/messageValidation";
 import { nanoid } from 'nanoid';
 import { getServerSession } from "next-auth";
 import { NextRequest, NextResponse } from "next/server";
 import authOptions from '../auth/authOptions';
-import { pusherServer } from "@/lib/pusher";
-import { toPusherKey } from "@/lib/utils";
-import { fetchRedis } from '@/helpers/fetchRedis';
 
 export async function POST(request: NextRequest) {
   try {
@@ -30,6 +29,14 @@ export async function POST(request: NextRequest) {
     if (!messageValidation.success) return new NextResponse("Invalid message format. ", { status: 400 });
 
     const message = messageValidation.data;
+
+    await pusherServer.trigger(
+      (
+        toPusherKey(`community-chat`)
+      ),
+      'incoming_message',
+      message
+    )
 
     await pusherServer.trigger(
       (
