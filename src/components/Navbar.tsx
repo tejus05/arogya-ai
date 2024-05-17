@@ -40,14 +40,14 @@ const Navbar: React.FC = () => {
     <header className="sticky top-0 z-50 flex flex-col items-center pt-4 bg-white w-full">
       <div className="flex gap-5 px-5 w-full text-black whitespace-nowrap max-w-7xl">
         <Link
-          href="home"
+          href="/"
           className="sm:text-3xl my-auto font-bold text-xl hover:opacity-90 transition text-black/85 cursor-pointer"
         >
           ArogyaAI
         </Link>
         <div className="flex-1" />
         <nav className="hidden justify-between items-center md:flex space-x-10">
-          <NavLink href="home">Home</NavLink>
+          <NavLink href="/">Home</NavLink>
           <NavLink href="dashboard">Dashboard</NavLink>
           <AuthStatus />
         </nav>
@@ -64,7 +64,7 @@ const Navbar: React.FC = () => {
             <Link href="/" className="text-xl  font-bold">
               ArogyaAI
             </Link>
-            <NavLink onClick={() => setIsOpen(false)} href="home">
+            <NavLink onClick={() => setIsOpen(false)} href="/">
               Home
             </NavLink>
             <AuthStatus />
@@ -104,10 +104,10 @@ const AuthStatus = () => {
             />
           </DropdownMenuTrigger>
           <DropdownMenuContent>
-            <DropdownMenuLabel>
+            <DropdownMenuLabel className='bg-white'>
               <p>{session.user!.email}</p>
             </DropdownMenuLabel>
-            <DropdownMenuItem>
+            <DropdownMenuItem className='bg-white'>
               <Link href="/api/auth/signout">Log Out</Link>
             </DropdownMenuItem>
           </DropdownMenuContent>

@@ -27,8 +27,8 @@ const ChatInput = () => {
   };
 
   return (
-    <div className="border-t border-gray-200 px-4 pt-4 mb-2 sm:mb-0 fixed bottom-0 w-full pb-10 z-50 bg-white">
-      <div className="relative flex-1 overflow-hidden rounded-lg shadow-sm ring-1 ring-inset ring-gray-300 focus-within:ring-2 focus-within:ring-indigo-600">
+    <div className="border-t border-gray-400 px-4 pt-4 mb-2 sm:mb-0 fixed bottom-0 w-full pb-10 z-50">
+      <div className="relative flex-1 overflow-hidden rounded-lg shadow-sm ring-1 ring-inset ring-black focus-within:ring-2 focus-within:ring-indigo-600">
         <TextareaAutosize
           ref={textareaRef}
           onKeyDown={(e) => {
@@ -41,7 +41,7 @@ const ChatInput = () => {
           value={input}
           onChange={(e) => setInput(e.target.value)}
           placeholder={`Message... `}
-          className="block w-full resize-none border-0 bg-transparent text-gray-900 placeholder:text-gray-400 sm:py-1.5 sm:text-sm sm:leading-6 border-none outline-none p-3.5 mt-2"
+          className="block w-full resize-none bg-transparent text-gray-900 sm:py-1.5 sm:text-sm sm:leading-6 border-none outline-none p-3.5 mt-2 placeholder:text-black"
           maxRows={4}
         />
 
@@ -57,7 +57,12 @@ const ChatInput = () => {
 
         <div className="absolute right-0 bottom-0 flex justify-between py-2 pl-3 pr-2">
           <div className="flex-shrin-0">
-            <Button disabled={isLoading} onClick={sendMessage} type="submit">
+            <Button
+              disabled={isLoading}
+              onClick={sendMessage}
+              type="submit"
+              className="bg-indigo-600 text-white"
+            >
               Send
             </Button>
           </div>
