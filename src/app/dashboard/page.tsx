@@ -27,7 +27,7 @@ const cardMap = [
   },
   {
     title: "Arogya Saathi",
-    link: "",
+    link: "https://arogyasathi.azurewebsites.net/",
     buttonText: "Get Results",
     description:
       "Get personalized health advice from our Arogya Saathi. Make informed decisions about your health and wellness with our AI-powered solution.",
@@ -46,11 +46,11 @@ const cardMap = [
       "https://img.freepik.com/free-vector/doctor-smartwatch-with-heart-medical-icons-smartwatch-health-tracker-health-monitor-activity-tracking-concept-white-background-bright-vibrant-violet-isolated-illustration_335657-265.jpg?size=626&ext=jpg&ga=GA1.1.735520172.1710720000&semt=ais",
   },
   {
-    title: "MentCare",
-    link: "",
+    title: "YogiBaba",
+    link: "https://yogibaba.azurewebsites.net/",
     buttonText: "Start Therapy",
     description:
-      "Connect with our AI chatbot, MentCare, for instant mental health support. Get insights, tips, and resources tailored to your needs.",
+      "Connect with our AI chatbot, YogiBaba, for instant mental health support. Get insights, tips, and resources tailored to your needs.",
     imageAlt: "Person having a therapy session",
     imageSrc:
       "https://assets-global.website-files.com/61cb94e5fee3d491ca9aa59c/6494b0deaae5793861ffecf6_61cb94e5fee3d458719aa9f8_first-therapy-appointment.png",

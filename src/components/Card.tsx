@@ -29,6 +29,7 @@ export const Card = ({
         <a
           href={link}
           className="text-center w-11/12 rounded-md py-2 bg-blue-700 text-white no-underline m-2"
+          target="_blank"
         >
           {buttonText}
         </a>
