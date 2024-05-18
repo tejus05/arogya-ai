@@ -17,10 +17,6 @@ export async function POST(request: NextRequest) {
     // @ts-ignore
     const finalSeconds = Number(hours*60*60) + Number(minutes*60) + Number(seconds);
 
-    const caloriesBurntMinute = 0.8333;
-
-    const caloriesBurnt = caloriesBurntMinute * finalSeconds;
-
     const session = await getServerSession(authOptions);
 
     if (!session) return new NextResponse("Unauthorised. ", { status: 401 });
@@ -33,6 +29,19 @@ export async function POST(request: NextRequest) {
 
     if (!dbUser) return new NextResponse("Unauthorised. ", { status: 401 });
 
+    const userDetails = await prisma.userDetails.findFirst({
+      where: {
+        userId: dbUser.id
+      }
+    })
+
+    if (!userDetails) return new NextResponse("User details not found. ", { status: 404 });
+
+    const { weight, height, age } = userDetails;
+    const MET = 6;
+    const BMR = 88.362 + (13.397 * weight) + (4.799 * height) - (5.677 * age);
+    const caloriesBurntMinute = BMR * MET / (24 * 60);
+    const caloriesBurnt = caloriesBurntMinute * finalSeconds;
 
 
     const response = await prisma.fitnessSession.create({

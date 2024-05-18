@@ -71,7 +71,7 @@ const page = async () => {
             <>
 
               <p className="text-5xl text-center font-semibold py-5">
-                Your Goals
+                Your Running Goals
               </p>
               <div className="flex flex-wrap justify-center items-center gap-10 px-5 pt-10">
                 {goals.map((goal, i) => (
@@ -113,7 +113,7 @@ const page = async () => {
         }
       </div>
       {
-        goals.length > 1 && (
+        goals.length > 0 && (
           <Dialog>
             <DialogTrigger
               asChild

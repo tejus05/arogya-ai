@@ -93,6 +93,7 @@ const Contact = () => {
                   <Input
                     min={120}
                     {...field}
+                    onChange={(e) => field.onChange(Number(e.target.value))}
                     type="number"
                     disabled={form.formState.isSubmitting}
                     placeholder="Enter your height"
@@ -118,6 +119,7 @@ const Contact = () => {
                 <FormControl>
                   <Input
                     {...field}
+                    onChange={(e) => field.onChange(Number(e.target.value))}
                     disabled={form.formState.isSubmitting}
                     placeholder="Enter your weight"
                     type="number"
@@ -144,6 +146,7 @@ const Contact = () => {
                 <FormControl>
                   <Input
                     {...field}
+                    onChange={(e) => field.onChange(Number(e.target.value))}
                     type="number"
                     min={15}
                     disabled={form.formState.isSubmitting}

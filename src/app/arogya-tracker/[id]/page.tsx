@@ -75,22 +75,30 @@ const SessionsPage = async ({params:{id}}:SessionsPageParams) => {
           </Dialog>
         </div>
         <div className="w-full xl:pl-20">
+          {fitnessSessions.length > 0 ? (
             <Table.Root variant="surface">
               <Table.Header>
                 <Table.Row className="">
-                  <Table.ColumnHeaderCell className="">Calories Burnt (in kcal)</Table.ColumnHeaderCell>
-                  <Table.ColumnHeaderCell className="">Duration (in seconds)</Table.ColumnHeaderCell>
+                  <Table.ColumnHeaderCell className="">
+                    Calories Burnt (in kcal)
+                  </Table.ColumnHeaderCell>
+                  <Table.ColumnHeaderCell className="">
+                    Duration (in seconds)
+                  </Table.ColumnHeaderCell>
                 </Table.Row>
               </Table.Header>
               {fitnessSessions.map((session, i) => (
-                  <Table.Body key={i}>
-                    <Table.Row>
-                      <Table.Cell>{session.caloriesBurnt}</Table.Cell>
-                      <Table.Cell className="">{session.duration}</Table.Cell>
-                    </Table.Row>
-                  </Table.Body>
+                <Table.Body key={i}>
+                  <Table.Row>
+                    <Table.Cell>{session.caloriesBurnt}</Table.Cell>
+                    <Table.Cell className="">{session.duration}</Table.Cell>
+                  </Table.Row>
+                </Table.Body>
               ))}
             </Table.Root>
+          ) : (
+            <div className="text-xl font-medium text-black/80">You are yet to start a fitness session. Go ahead!!</div>
+          )}
         </div>
       </div>
     </div>
