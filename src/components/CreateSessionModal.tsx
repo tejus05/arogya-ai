@@ -107,6 +107,7 @@ function Stopwatch({ goalId }: { goalId: string }) {
         <button
           onClick={() => {
             stop();
+            reset();
             createSession();
           }}
           className="text-xs font-bold px-2 py-2 border-none rounded-lg cursor-pointer text-white bg-yellow-400 transition-colors duration-500 ease-in-out hover:bg-yellow-500 text-center mt-5"

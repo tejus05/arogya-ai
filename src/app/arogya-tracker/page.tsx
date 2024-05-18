@@ -29,12 +29,15 @@ const page = async () => {
     where: {
       userId: dbUser!.id,
     },
+    include: {
+      fitnessSessions: true
+    }
   });
   return (
     <div className="text-center flex justify-center items-center flex-col bg-gray-200">
       <div className="flex flex-col gap-5 py-20 lg:text-left text-center lg:pr-10">
         <>
-          {!goals && (
+          {goals.length == 0 && (
             <>
               <h1 className="lg:text-2xl md:text-xl text-lg font-semibold lg:text-left text-center">
                 You do not have any goals. Please create one below.
@@ -63,43 +66,54 @@ const page = async () => {
           )}
         </>
 
-        <p className="text-4xl text-center font-semibold py-5 underline">
-          Your Goals
-        </p>
-        <div className="flex flex-wrap justify-center items-center gap-10 px-5 pt-10">
-          {goals.map((goal, i) => (
-            <Link key={i} href={`/arogya-tracker/${goal.id}`}>
-              <Card className="flex flex-col text-center px-20 mx-10 py-16 space-y-10 shadow-lg bg-white cursor-pointer">
-                <span className="text-2xl font-semibold">
-                  {i + 1}
-                  {". "}
-                  {goal.goalName}
-                </span>
-                <div className="flex flex-col justify-center items-center gap-y-2">
-                  <Switch
-                    id="toggle-complete"
-                    checked={goal.isCompleted}
-                    className="bg-gray-300"
-                  />
-                  <Label htmlFor="toggle-complete">Completed</Label>
-                </div>
-                <div className="flex justify-between w-full">
-                  <div className="flex flex-col mx-10">
-                    <span className="font-medium">Start Date </span>
-                    <span>{goal.startDate.toLocaleDateString()}</span>
-                  </div>
-                  <div className="flex flex-col mx-10">
-                    <span className="font-medium">Streaks </span>
-                    <span>{goal.streaks} </span>
-                  </div>
-                </div>
-              </Card>
-            </Link>
-          ))}
-        </div>
+        {
+          goals.length > 0 && (
+            <>
+
+              <p className="text-5xl text-center font-semibold py-5">
+                Your Goals
+              </p>
+              <div className="flex flex-wrap justify-center items-center gap-10 px-5 pt-10">
+                {goals.map((goal, i) => (
+                  <Link key={i} href={`/arogya-tracker/${goal.id}`}>
+                    <Card className="flex flex-col text-center px-20 mx-10 py-16 space-y-10 shadow-lg bg-white cursor-pointer">
+                      <span className="text-2xl font-semibold">
+                        {i + 1}
+                        {". "}
+                        {goal.goalName}
+                      </span>
+                      <div className="flex flex-col justify-center items-center gap-y-2">
+                        <Switch
+                          id="toggle-complete"
+                          checked={goal.isCompleted}
+                          className="bg-gray-300"
+                        />
+                        <Label htmlFor="toggle-complete">Completed</Label>
+                      </div>
+                      <div className="flex justify-between w-full">
+                        <div className="flex flex-col mx-10">
+                          <span className="font-medium">Start Date </span>
+                          <span>{goal.startDate.toLocaleDateString()}</span>
+                        </div>
+                        <div className="flex flex-col mx-10">
+                          <span className="font-medium">Streaks </span>
+                          <span>{goal.streaks} </span>
+                        </div>
+                        <div className="flex flex-col mx-10">
+                          <span className="font-medium">Activities </span>
+                          <span>{goal.fitnessSessions.length} </span>
+                        </div>
+                      </div>
+                    </Card>
+                  </Link>
+                ))}
+              </div>
+            </>
+          )
+        }
       </div>
       {
-        goals && goals.length && (
+        goals.length > 1 && (
           <Dialog>
             <DialogTrigger
               asChild

@@ -70,7 +70,8 @@ model Goals {
   goalName    String
   isCompleted Boolean  @default(false)
   startDate   DateTime @default(now())
-  streaks     Int
+  streaks     Int @default(0)
+  lastUpdated DateTime @default(now())
 
  fitnessSessions  FitnessSession[]
 }

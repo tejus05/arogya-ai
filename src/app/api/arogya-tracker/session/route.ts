@@ -43,6 +43,34 @@ export async function POST(request: NextRequest) {
       },
     })
 
+    const goal = await prisma.goals.findUnique({
+      where: {
+        id: goalId
+      }
+    })
+
+    if (!goal) return new NextResponse("Goal not found. ", { status: 404 });
+    
+    
+    const currentDate = new Date();
+    const lastUpdated = new Date(goal.lastUpdated)
+
+    if (currentDate.getDate() !== lastUpdated.getDate() ||
+      currentDate.getMonth() !== lastUpdated.getMonth() ||
+      currentDate.getFullYear() !== lastUpdated.getFullYear()) {
+      await prisma.goals.update({
+        where: {
+          id: goalId
+        },
+        data: {
+          streaks: {
+            increment: 1
+          },
+          lastUpdated: currentDate
+        }
+      })
+    }
+
 
     return NextResponse.json(response);
 
