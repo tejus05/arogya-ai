@@ -51,7 +51,7 @@ const Contact = () => {
   };
 
   return (
-    <section className="bg-green-200">
+    <section className="bg-blue-500 border-none">
       <Form {...form}>
         <form
           onSubmit={form.handleSubmit(onSubmit)}
@@ -91,7 +91,7 @@ const Contact = () => {
                 </Label>
                 <FormControl>
                   <Input
-                  min={120}
+                    min={120}
                     {...field}
                     type="number"
                     disabled={form.formState.isSubmitting}
@@ -161,12 +161,13 @@ const Contact = () => {
           />
           <div className="flex justify-between items-center md:flex-row flex-col-reverse gap-7 md:gap-0">
             <Button
-              className="bg-[#38DB00] rounded-lg text-[17px] px-5 py-6 hover:bg-[#33C700]"
+              className="bg-indigo-700 text-white rounded-lg text-[17px] px-5 py-6 hover:bg-indigo-600"
               type="submit"
               variant="default"
               disabled={form.formState.isSubmitting}
             >
-              Create<Rocket className="ml-2" />
+              Create
+              <Rocket className="ml-2" />
             </Button>
           </div>
         </form>

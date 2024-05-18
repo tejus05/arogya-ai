@@ -188,7 +188,7 @@ const MessageElement = ({
                   <span
                     className={cn("px-4 py-2 rounded-lg inline-block", {
                       "bg-indigo-600 text-white": isCurrentUser,
-                      "bg-gray-300 text-gray-900": !isCurrentUser,
+                      "bg-blue-600 text-white": !isCurrentUser,
                       "rounded-br-none":
                         !hasNextMessageFromSameUser && isCurrentUser,
                       "rounded-bl-none":

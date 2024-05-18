@@ -1,9 +1,18 @@
 import SwitchComponent from "@/components/SwitchComponent"
+import { Button } from "@/components/ui/button"
 import { Card } from "@/components/ui/card"
 import { Label } from "@/components/ui/label"
-import { Switch } from "@/components/ui/switch"
 import prisma from "@/db"
-import axios from "axios"
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
+import CreateSessionModal from "@/components/CreateSessionModal"
+
 
 interface SessionsPageParams{
   params: {
@@ -21,14 +30,11 @@ const SessionsPage = async ({params:{id}}:SessionsPageParams) => {
   if(!goal) return "Could not find the goal :("
   
   return (
-    <div className="flex justify-center items-center h-screen bg-gray-200">
+    <div className="flex justify-center flex-col gap-5 items-center h-screen bg-gray-200">
       <Card className="flex flex-col text-center px-20 py-16 space-y-10 shadow-lg bg-white w-full max-w-[40%]">
         <span className="text-2xl font-semibold">{goal.goalName}</span>
         <div className="flex flex-col justify-center items-center gap-y-2">
-          <SwitchComponent
-            id={goal.id}
-            isCompleted={goal.isCompleted}
-          />
+          <SwitchComponent id={goal.id} isCompleted={goal.isCompleted} />
           <Label htmlFor="toggle-complete">Completed</Label>
         </div>
         <div className="flex justify-between w-full">
@@ -42,6 +48,21 @@ const SessionsPage = async ({params:{id}}:SessionsPageParams) => {
           </div>
         </div>
       </Card>
+      <div>
+        <Dialog>
+          <DialogTrigger asChild>
+            <Button className="bg-blue-500 text-white">Add a session</Button>
+          </DialogTrigger>
+          <DialogContent>
+            <DialogHeader>
+              <DialogDescription className="h-full w-full">
+                <CreateSessionModal/>
+              </DialogDescription>
+            </DialogHeader>
+          </DialogContent>
+        </Dialog>
+
+      </div>
     </div>
   );
 }

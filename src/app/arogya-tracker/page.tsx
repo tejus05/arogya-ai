@@ -43,13 +43,13 @@ const page = async () => {
           <Dialog>
             <DialogTrigger
               asChild
-              className="flex justify-center items-center w-full text-center mx-auto"
+              className="flex justify-center items-center w-full text-center mx-auto mb-7"
             >
-              <Button className="lg:text-xl md:text-lg text-[18px] text-muted-foreground font-normal mt-0 xl:mt-4 lg:text-left text-center bg-gray-500 text-white uppercase max-w-[400px]">
+              <Button className="lg:text-xl md:text-lg text-[18px] text-muted-foreground font-normal mt-0 xl:mt-4 lg:text-left text-center bg-blue-500 text-white uppercase max-w-[400px]">
                 Create A Goal
               </Button>
             </DialogTrigger>
-            <DialogContent className="bg-green-200 text-center flex justify-center items-center mx-auto">
+            <DialogContent className="bg-blue-500 text-center flex justify-center items-center mx-auto">
               <DialogHeader>
                 <DialogTitle className="text-2xl py-5">
                   Please enter your details below:{" "}
@@ -61,11 +61,13 @@ const page = async () => {
             </DialogContent>
           </Dialog>
         </>
+        <div className="border-t border-1 border-black/60 w-full mt-5"/>
+        <p className="text-4xl text-center font-semibold py-5 underline">Your Goals</p>
         <div className="flex flex-wrap justify-center items-center gap-10 px-5 pt-10">
           {goals.map((goal, i) => (
             <Link key={i} href={`/arogya-tracker/${goal.id}`}>
               <Card className="flex flex-col text-center px-20 py-16 space-y-10 shadow-lg bg-white cursor-pointer">
-                <span className="text-2xl font-semibold">{goal.goalName}</span>
+                <span className="text-2xl font-semibold">{i + 1}{". "}{goal.goalName}</span>
                 <div className="flex flex-col justify-center items-center gap-y-2">
                   <Switch
                     id="toggle-complete"
