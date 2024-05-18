@@ -1,10 +1,10 @@
 "use client"
 
-import React from 'react'
-import { Button } from './ui/button'
-import { useState, useEffect, useRef } from "react";
+import axios from 'axios';
+import { useRouter } from 'next/navigation';
+import { useEffect, useRef, useState } from "react";
 
-function Stopwatch() {
+function Stopwatch({ goalId }: { goalId: string }) {
   const [isRunning, setIsRunning] = useState(false);
   const [elapsedTime, setElapsedTime] = useState(0);
   const intervalIdRef = useRef(null);
@@ -37,12 +37,20 @@ function Stopwatch() {
     setElapsedTime(0);
     setIsRunning(false);
   }
+  // @ts-ignore
+  let hours;
+  // @ts-ignore
+  let minutes;
+  // @ts-ignore
+  let seconds;
+  // @ts-ignore
+  let milliseconds;
 
   function formatTime() {
-    let hours = Math.floor(elapsedTime / (1000 * 60 * 60));
-    let minutes = Math.floor((elapsedTime / (1000 * 60)) % 60);
-    let seconds = Math.floor((elapsedTime / 1000) % 60);
-    let milliseconds = Math.floor((elapsedTime % 1000) / 10);
+    hours = Math.floor(elapsedTime / (1000 * 60 * 60));
+    minutes = Math.floor((elapsedTime / (1000 * 60)) % 60);
+    seconds = Math.floor((elapsedTime / 1000) % 60);
+    milliseconds = Math.floor((elapsedTime % 1000) / 10);
 
     // @ts-ignore
     hours = String(hours).padStart(2, "0");
@@ -54,6 +62,20 @@ function Stopwatch() {
     milliseconds = String(milliseconds).padStart(2, "0");
 
     return `${minutes}:${seconds}:${milliseconds}`;
+  }
+  const router = useRouter();
+
+  async function createSession() {
+    try {
+      const response = await axios.post("/api/arogya-tracker/session", {
+        // @ts-ignore
+        time: `${hours}:${minutes}:${seconds}`,
+        goalId,
+      });
+      router.refresh();
+    } catch (error) {
+      console.log(error);
+    }
   }
 
   return (
@@ -82,6 +104,15 @@ function Stopwatch() {
             Reset
           </button>
         </div>
+        <button
+          onClick={() => {
+            stop();
+            createSession();
+          }}
+          className="text-xs font-bold px-2 py-2 border-none rounded-lg cursor-pointer text-white bg-yellow-400 transition-colors duration-500 ease-in-out hover:bg-yellow-500 text-center mt-5"
+        >
+          Submit
+        </button>
       </div>
     </div>
   );
@@ -90,11 +121,11 @@ function Stopwatch() {
 
 
 
-const CreateSessionModal = () => {
+const CreateSessionModal = ({goalId}:{goalId: string}) => {
   return (
-    <div className='bg-blue-300 flex justify-center items-center flex-col w-full h-full'>
+    <div className='flex justify-center items-center flex-col w-full h-full'>
       <div>
-        <Stopwatch/>
+        <Stopwatch goalId={goalId} />
       </div>
     </div>
   )

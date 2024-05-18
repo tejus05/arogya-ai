@@ -92,7 +92,5 @@ model FitnessSession{
   goalId String
 
   caloriesBurnt Int
-  startTime Int
-  endTime Int
   duration Int
 }

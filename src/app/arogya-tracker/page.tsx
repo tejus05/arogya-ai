@@ -35,39 +35,46 @@ const page = async () => {
       <div className="flex flex-col gap-5 py-20 lg:text-left text-center lg:pr-10">
         <>
           {!goals && (
-            <h1 className="lg:text-2xl md:text-xl text-lg font-semibold lg:text-left text-center">
-              You do not have any goals. Please create one below.
-            </h1>
+            <>
+              <h1 className="lg:text-2xl md:text-xl text-lg font-semibold lg:text-left text-center">
+                You do not have any goals. Please create one below.
+              </h1>
+              <Dialog>
+                <DialogTrigger
+                  asChild
+                  className="flex justify-center items-center w-full text-center mx-auto mb-7"
+                >
+                  <Button className="lg:text-xl md:text-lg text-[18px] text-muted-foreground font-normal mt-0 xl:mt-4 lg:text-left text-center bg-blue-500 text-white uppercase lg:max-w-[400px] max-w-[150px]">
+                    Create A Goal
+                  </Button>
+                </DialogTrigger>
+                <DialogContent className="bg-blue-500 text-center flex justify-center items-center mx-auto">
+                  <DialogHeader>
+                    <DialogTitle className="text-2xl py-5">
+                      Please enter your details below:{" "}
+                    </DialogTitle>
+                    <DialogDescription>
+                      <UserInputForm />
+                    </DialogDescription>
+                  </DialogHeader>
+                </DialogContent>
+              </Dialog>
+            </>
           )}
-
-          <Dialog>
-            <DialogTrigger
-              asChild
-              className="flex justify-center items-center w-full text-center mx-auto mb-7"
-            >
-              <Button className="lg:text-xl md:text-lg text-[18px] text-muted-foreground font-normal mt-0 xl:mt-4 lg:text-left text-center bg-blue-500 text-white uppercase max-w-[400px]">
-                Create A Goal
-              </Button>
-            </DialogTrigger>
-            <DialogContent className="bg-blue-500 text-center flex justify-center items-center mx-auto">
-              <DialogHeader>
-                <DialogTitle className="text-2xl py-5">
-                  Please enter your details below:{" "}
-                </DialogTitle>
-                <DialogDescription>
-                  <UserInputForm />
-                </DialogDescription>
-              </DialogHeader>
-            </DialogContent>
-          </Dialog>
         </>
-        <div className="border-t border-1 border-black/60 w-full mt-5"/>
-        <p className="text-4xl text-center font-semibold py-5 underline">Your Goals</p>
+
+        <p className="text-4xl text-center font-semibold py-5 underline">
+          Your Goals
+        </p>
         <div className="flex flex-wrap justify-center items-center gap-10 px-5 pt-10">
           {goals.map((goal, i) => (
             <Link key={i} href={`/arogya-tracker/${goal.id}`}>
-              <Card className="flex flex-col text-center px-20 py-16 space-y-10 shadow-lg bg-white cursor-pointer">
-                <span className="text-2xl font-semibold">{i + 1}{". "}{goal.goalName}</span>
+              <Card className="flex flex-col text-center px-20 mx-10 py-16 space-y-10 shadow-lg bg-white cursor-pointer">
+                <span className="text-2xl font-semibold">
+                  {i + 1}
+                  {". "}
+                  {goal.goalName}
+                </span>
                 <div className="flex flex-col justify-center items-center gap-y-2">
                   <Switch
                     id="toggle-complete"
@@ -91,6 +98,30 @@ const page = async () => {
           ))}
         </div>
       </div>
+      {
+        goals && goals.length && (
+          <Dialog>
+            <DialogTrigger
+              asChild
+              className="flex justify-center items-center w-full text-center mx-auto mb-7 fixed bottom-10 right-10"
+            >
+              <Button className="lg:text-xl md:text-lg text-[18px] text-muted-foreground font-normal mt-0 xl:mt-4 lg:text-left text-center bg-blue-500 text-white uppercase max-w-[200px]">
+                Create A Goal
+              </Button>
+            </DialogTrigger>
+            <DialogContent className="bg-blue-500 text-center flex justify-center items-center mx-auto">
+              <DialogHeader>
+                <DialogTitle className="text-2xl py-5">
+                  Please enter your details below:{" "}
+                </DialogTitle>
+                <DialogDescription>
+                  <UserInputForm />
+                </DialogDescription>
+              </DialogHeader>
+            </DialogContent>
+          </Dialog>
+        )
+      }
     </div>
   );
 };

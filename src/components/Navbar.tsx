@@ -60,12 +60,15 @@ const Navbar: React.FC = () => {
               <Menu className="h-6 w-6" />
             </button>
           </SheetTrigger>
-          <SheetContent side="top" className="flex flex-col items-center justify-center gap-4 p-4">
+          <SheetContent side="top" className="flex flex-col items-center justify-center gap-4 p-4 bg-white">
             <Link href="/" className="text-xl  font-bold">
               ArogyaAI
             </Link>
             <NavLink onClick={() => setIsOpen(false)} href="/">
               Home
+            </NavLink>
+            <NavLink onClick={() => setIsOpen(false)} href="dashboard">
+              Dashboard
             </NavLink>
             <AuthStatus />
           </SheetContent>
