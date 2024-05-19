@@ -35,6 +35,8 @@ const NavLink: React.FC<NavLinkProps> = ({ href, children, onClick }) => {
 
 const Navbar: React.FC = () => {
   const [isOpen, setIsOpen] = React.useState(false);
+  const { status, data: session } = useSession();
+
 
   return (
     <header className="sticky top-0 z-50 flex flex-col items-center pt-4 bg-white w-full">
@@ -48,7 +50,11 @@ const Navbar: React.FC = () => {
         <div className="flex-1" />
         <nav className="hidden justify-between items-center md:flex space-x-10">
           <NavLink href="/">Home</NavLink>
-          <NavLink href="dashboard">Dashboard</NavLink>
+          {
+            status == "authenticated" && (
+              <NavLink href="dashboard">Dashboard</NavLink>
+            )
+          }
           <AuthStatus />
         </nav>
         <Sheet open={isOpen} onOpenChange={setIsOpen}>
@@ -67,9 +73,13 @@ const Navbar: React.FC = () => {
             <NavLink onClick={() => setIsOpen(false)} href="/">
               Home
             </NavLink>
-            <NavLink onClick={() => setIsOpen(false)} href="dashboard">
-              Dashboard
-            </NavLink>
+            {
+              status == "authenticated" && (
+                <NavLink onClick={() => setIsOpen(false)} href="dashboard">
+                  Dashboard
+                </NavLink>
+              )
+            }
             <AuthStatus />
           </SheetContent>
         </Sheet>

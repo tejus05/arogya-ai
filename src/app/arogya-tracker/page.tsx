@@ -18,7 +18,7 @@ import { Label } from "@/components/ui/label";
 import { redirect } from "next/navigation";
 import Link from "next/link";
 
-const page = async () => {
+const ArogyaTracker = async () => {
   const session = await getServerSession(authOptions);
   const dbUser = await prisma.user.findUnique({
     where: {
@@ -75,37 +75,39 @@ const page = async () => {
               </p>
               <div className="flex flex-wrap justify-center items-center gap-10 px-5 pt-10">
                 {goals.map((goal, i) => (
-                  <Link key={i} href={`/arogya-tracker/${goal.id}`}>
-                    <Card className="flex flex-col text-center px-20 mx-10 py-16 space-y-10 shadow-lg bg-white cursor-pointer">
-                      <span className="text-2xl font-semibold">
-                        {i + 1}
-                        {". "}
-                        {goal.goalName}
-                      </span>
-                      <div className="flex flex-col justify-center items-center gap-y-2">
-                        <Switch
-                          id="toggle-complete"
-                          checked={goal.isCompleted}
-                          className="bg-gray-300"
-                        />
-                        <Label htmlFor="toggle-complete">Completed</Label>
+                  <Card key={i} className="flex flex-col text-center px-20 mx-10 py-16 space-y-10 shadow-lg bg-white">
+                    <span className="text-2xl font-semibold">
+                      {i + 1}
+                      {". "}
+                      {goal.goalName}
+                    </span>
+                    <div className="flex flex-col justify-center items-center gap-y-2">
+                      <Switch
+                        id="toggle-complete"
+                        checked={goal.isCompleted}
+                        className="bg-gray-300"
+                        disabled
+                      />
+                      <Label htmlFor="toggle-complete">Completed</Label>
+                    </div>
+                    <div className="flex justify-between w-full">
+                      <div className="flex flex-col mx-10">
+                        <span className="font-medium">Start Date </span>
+                        <span>{goal.startDate.toLocaleDateString()}</span>
                       </div>
-                      <div className="flex justify-between w-full">
-                        <div className="flex flex-col mx-10">
-                          <span className="font-medium">Start Date </span>
-                          <span>{goal.startDate.toLocaleDateString()}</span>
-                        </div>
-                        <div className="flex flex-col mx-10">
-                          <span className="font-medium">Streaks </span>
-                          <span>{goal.streaks} </span>
-                        </div>
-                        <div className="flex flex-col mx-10">
-                          <span className="font-medium">Activities </span>
-                          <span>{goal.fitnessSessions.length} </span>
-                        </div>
+                      <div className="flex flex-col mx-10">
+                        <span className="font-medium">Streaks </span>
+                        <span>{goal.streaks} </span>
                       </div>
-                    </Card>
-                  </Link>
+                      <div className="flex flex-col mx-10">
+                        <span className="font-medium">Activities </span>
+                        <span>{goal.fitnessSessions.length} </span>
+                      </div>
+                    </div>
+                    <Button className="bg-indigo-600 text-white text-lg">
+                      View
+                    </Button>
+                  </Card>
                 ))}
               </div>
             </>
@@ -140,4 +142,4 @@ const page = async () => {
   );
 };
 
-export default page;
+export default ArogyaTracker;

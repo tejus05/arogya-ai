@@ -17,7 +17,6 @@ export const Card = ({
   buttonText: string,
   link: string,
 }) => {
-  console.log(buttonText);
   return (
     <div className="w-60 rounded-xl shadow-lg flex flex-col m-2 bg-white">
       { (

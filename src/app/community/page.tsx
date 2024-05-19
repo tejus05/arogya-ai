@@ -32,7 +32,7 @@ const Community = async () => {
   if (!session) return notFound();
   const initialMessages = await getChatMessages();
   return (
-    <div className="min-h-screen h-full gradient">
+    <div className="min-h-screen h-full gradient flex-1 justify-between flex flex-col max-h-[calc(100vh-6rem)]">
       <div className="text-center text-[36px] font-bold py-7 px-6 text-black/85">
         Have doubts? Wanna share your progress? Don&apos;t hesitate to ask!! 🤗
       </div>

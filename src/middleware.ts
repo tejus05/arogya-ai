@@ -4,5 +4,7 @@ export const config = {
   matcher: [
     '/dashboard',
     '/community',
+    '/arogya-tracker',
+    '/arogya-tracker/:id+',
   ]
 }

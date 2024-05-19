@@ -1,8 +1,8 @@
 "use client";
 
 import { Card } from '@/components/Card';
-import Link from 'next/link';
-import React from 'react'
+import { useSession } from 'next-auth/react';
+import { redirect } from 'next/navigation';
 
 const cardMap = [
   {
@@ -10,8 +10,8 @@ const cardMap = [
     link: "",
     buttonText: "Start Practicing",
     description:
-      "Improve your yoga poses with our advanced AI-powered algorithms. Perfect your asanas and enhance your flexibility.",
-    imageAlt: "Yoga practitioner in a pose",
+      "Improve your yoga poses with our advanced AI-powered algorithms. Perfect your asanas and enhance your flexibility. ( Currently not deployed on a server :/ )",
+    imageAlt: "Yoga practitioner in a pose ",
     imageSrc:
       "https://images.shiksha.com/mediadata/images/articles/1689079450php3qZVMP.jpeg",
   },
@@ -58,6 +58,11 @@ const cardMap = [
 ];
 
 const Dashboard = () => {
+  // const { status } = useSession();
+  // if (status === "unauthenticated") {
+  //   return redirect("/api/auth/signin");
+  // }
+
   return (
     <div className='flex justify-center items-center flex-wrap'>
       {
