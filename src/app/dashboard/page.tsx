@@ -1,8 +1,6 @@
 "use client";
 
 import { Card } from '@/components/Card';
-import { useSession } from 'next-auth/react';
-import { redirect } from 'next/navigation';
 
 const cardMap = [
   {
